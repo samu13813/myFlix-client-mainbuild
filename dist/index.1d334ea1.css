@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+  background-color: #203239;
+  color: #EEEEEE;
+  font-family: "Helvetica";
+}
+* {
+  box-sizing: border-box;
+  background-color: #203239;
+  color: #EEEEEE;
+  font-family: "Helvetica";
+}
+* {
+  box-sizing: border-box;
+  color: #EEEEEE;
+  font-family: "Helvetica";
+}
+
+.navbar-collapse, .nav-link {
+  background-color: #F8F9FA !important;
+}
+.my-flix {
+  color: steelblue;
+}
+/*# sourceMappingURL=index.1d334ea1.css.map */
