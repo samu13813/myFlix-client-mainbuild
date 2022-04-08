@@ -24,7 +24,7 @@ function NavbarComp({visibilityFilter}) {
 
   return (
     <div>
-      <Navbar bg="light" variant="light" expand="md">
+      <Navbar bg="light" variant="light" expand="md" >
           <Navbar.Brand className='navbar-logo' href="/">My Flix</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
@@ -34,7 +34,7 @@ function NavbarComp({visibilityFilter}) {
               <Nav.Link onClick={() => { onLoggedOut(); }}>Log Out</Nav.Link>
             </Nav>
           </Navbar.Collapse>
-          <Nav.Item className='float-right'>
+          <Nav.Item>
               <VisibilityFilterInput visibilityFilter={visibilityFilter} />
           </Nav.Item>
       </Navbar>

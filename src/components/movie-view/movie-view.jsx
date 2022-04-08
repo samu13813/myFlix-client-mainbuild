@@ -37,6 +37,7 @@ class MovieView extends React.Component {
   //     console.log(error);
   //   });
   // }
+  
   addFavorite = (movies) => {
     const Username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
@@ -109,12 +110,12 @@ class MovieView extends React.Component {
                     <Button className='mt-5 mb-0' value={movies._id} variant='light' onClick={(movies) => this.addFavorite(movies)}>Add to Favorites</Button>
                   )
                 }
-                
 
-                <Link to={`/`}>
-                  <Button className='ml-3 mt-5 mb-0' variant='secondary' onClick={() => { onBackClick(); }}>Back</Button>
-                </Link>
-
+                <Row>
+                  <Link to={`/`}>
+                     <Button className='mt-5' variant='secondary' onClick={() => { onBackClick(); }}>Back</Button>
+                  </Link>
+                </Row>
               </Card.Body>
             </Card>
           </Row>

@@ -8,13 +8,12 @@ class MovieCard extends React.Component {
     const { movies } = this.props;
 
     return (
-      <Container className='mx-auto w-75 mt-3'>
+      <Container className='mx-auto w-75 mt-2 mb-2'>
         <Row className='d-block'>
           <Card className='mx-auto'>
             <Card.Body>
               <Card.Img className='pr-2 mb-2 w-75' src={movies.ImagePath} />
               <Card.Title>{movies.Title}</Card.Title>
-              <Card.Text>{movies.Description}</Card.Text>
               <Link to={`/movies/${movies._id}`}>
                 <Button variant='secondary'>Open</Button>
               </Link>

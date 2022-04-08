@@ -23,7 +23,7 @@ function MoviesList(props) {
       <Col md={4} key={m._id}>
         <MovieCard movies={m} />
       </Col>
-    ))};
+    ))}
   </>;
 }
 
