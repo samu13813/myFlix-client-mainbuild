@@ -18,44 +18,26 @@ class MovieView extends React.Component {
     Favorites: this.props.user.Favorites || []
   }
 
-  // addFavorite() {
-  //   const token = localStorage.getItem('token');
-  //   const Username = localStorage.getItem('user');
-  //   const { movies } = this.props;
-
-  //   axios.post(`https://myflixmovies-app.herokuapp.com/users/${Username}/movies/${movies._id}`,
-  //   {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   })
-  //   .then(response => {
-  //     console.log(response);
-  //     alert(movies.Title + 'was added to your favorites');
-  //     window.open('/movies/${movies._id}', '_self');
-  //   })
-  //   .catch(function (error) {
-
-  //     console.log(error);
-  //   });
-  // }
-  
-  addFavorite = (movies) => {
-    const Username = localStorage.getItem('user');
+  addFavorite() {
     const token = localStorage.getItem('token');
-  
-    axios.post(`https://myflixmovies-app.herokuapp.com/users/${Username}/movies/${movies._id}`, {
-      headers: { Authorization: `Bearer ${token}`},
+    const Username = localStorage.getItem('user');
+    const { movies } = this.props;
+
+    axios.post(`https://myflixmovies-app.herokuapp.com/users/${Username}/movies/${movies._id}`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
     })
-    .then((response) => {
+    .then(response => {
       console.log(response);
-      alert(movies.Title + 'was added to your Favorites');
-      window.open(`/movies`, '_self');
+      alert(movies.Title + 'was added to your favorites');
+      window.open('/movies/${movies._id}', '_self');
     })
     .catch(function (error) {
+
       console.log(error);
     });
-  };
+  }
   
-
   removeFavorite = (movies) => {
     const Username = localStorage.getItem('user');
     const token = localStorage.getItem('token');

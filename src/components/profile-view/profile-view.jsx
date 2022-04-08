@@ -67,11 +67,16 @@ class ProfileView extends React.Component{
       headers: { Authorization: `Bearer ${token}`},
     })
     .then((response) => {
+      let formattedDate = null;
+      let anyBirthday = response.data.Birthday;
+      if(anyBirthday){
+        formattedDate = anyBirthday.slice(0,10)
+      }
       this.setState({
         Username: response.data.Username,
         Password: response.data.Password,
         Email: response.data.Email,
-        Birthday: response.data.Birthday,
+        Birthday: formattedDate,
       });
 
       localStorage.setItem('user', this.state.Username);
@@ -149,15 +154,28 @@ onRemoveFavorite = (movies) => {
   render() {
 
     const { movies, onBackClick } = this.props;
-    const { FavoriteMovies, Username } = this.state;
+    const { FavoriteMovies, Username, Email, formattedDate } = this.state;
+    
 
     return (
       <Container className='mt-3'>
         <Row>
+        <Col>
+          <Card>
+            <Card.Body>
+             <Card.Title as='h3'>Hello, {Username}</Card.Title>
+              <Card.Text><b>Username:</b> {Username}</Card.Text>
+              <Card.Text><b>Email:</b> {Email}</Card.Text>
+              <Card.Text><b>Birthday:</b> {formattedDate}</Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col>
+        <Row>
           <Col>
             <Card>
               <Card.Body>
-                <Card.Title>Profile</Card.Title>
+                <Card.Title as='h3'>Profile</Card.Title>
                 <Form onSubmit={(e) =>
                   this.editUser(
                     e,
@@ -177,7 +195,7 @@ onRemoveFavorite = (movies) => {
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label className='mt-2'>Password</Form.Label>
                     <Form.Control
                       type='password'
                       placeholder='New Password'
@@ -186,7 +204,7 @@ onRemoveFavorite = (movies) => {
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label className='mt-2'>Email</Form.Label>
                     <Form.Control
                       type='email'
                       placeholder='New Email'
@@ -195,7 +213,7 @@ onRemoveFavorite = (movies) => {
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label>Birthday</Form.Label>
+                    <Form.Label className='mt-2'>Birthday</Form.Label>
                     <Form.Control
                       type='date'
                       onChange={(e) => this.setBirthday(e.target.value)}
@@ -210,6 +228,10 @@ onRemoveFavorite = (movies) => {
             </Card>
           </Col>
         </Row>
+        </Col>
+        </Row>
+        
+        
         <Row>
           <Col className='mt-3'>
             <h3>{Username} Favorite Movies </h3>
@@ -251,7 +273,7 @@ onRemoveFavorite = (movies) => {
             </Card>
           </Col>
         </Row>
-        <Button variant='secondary' className='mt-3' onClick={() => { onBackClick();}}>Back</Button>
+        <Button variant='secondary' className='mt-3 mb-3' onClick={() => { onBackClick();}}>Back</Button>
       </Container>
     )
   }
