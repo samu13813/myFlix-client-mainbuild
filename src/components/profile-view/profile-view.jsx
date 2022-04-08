@@ -1,6 +1,16 @@
 import React from 'react';
 import axios from 'axios';
-import {Form, Button, Card, Container, Col, Row} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import {Form, Button, Card, Container, Col, Row, CardGroup } from 'react-bootstrap';
+import { setMovies, setUser, updateUser } from '../../actions/actions';
+
+let mapStateToProps = (state) => {
+  return {
+    movies: state.movies,
+    user: state.user
+  }
+}
 
 class ProfileView extends React.Component{
 
@@ -119,17 +129,17 @@ class ProfileView extends React.Component{
   };
 
 //Allows user to remove a movie from favorites
-onRemoveFavorite = (e, movie) => {
+onRemoveFavorite = (movies) => {
   const Username = localStorage.getItem('user');
   const token = localStorage.getItem('token');
 
-  axios.delete(`https://myflixmovies-app.herokuapp.com/${Username}/movies/${movie._id}`, {
+  axios.delete(`https://myflixmovies-app.herokuapp.com/users/${Username}/movies/${movies._id}`, {
     headers: { Authorization: `Bearer ${token}`},
   })
   .then((response) => {
     console.log(response);
     alert('Movie Removed from Favorites');
-    this.componentDidMount();
+    window.open(`/profile`, '_self');
   })
   .catch(function (error) {
     console.log(error);
@@ -138,7 +148,7 @@ onRemoveFavorite = (e, movie) => {
 
   render() {
 
-    const { onBackClick } = this.props;
+    const { movies, onBackClick } = this.props;
     const { FavoriteMovies, Username } = this.state;
 
     return (
@@ -208,30 +218,36 @@ onRemoveFavorite = (e, movie) => {
         <Row>
           <Col>
             <Card>
-              <Card.Body>
-                {FavoriteMovies.lenght === 0 && (
-                  <div>No Favorite Movies</div>
+            <Card.Body className='favs-override'>
+                {FavoriteMovies.length === 0 && (
+                  <div className="text-center">No favorites added yet</div>
                 )}
-                <Row>
-                  {FavoriteMovies.lenght > 0 && movies.map((movie) => {
-                    if (movie._id === FavoriteMovies.find((favorite) => favorite === movie._id)
-                  ) {
-                    return (
-                      <Card key={movie._id}>
-                        <Card.Img
-                          className='pr-2 mb-2 w-25'
-                          src={movie.ImagePath}
-                        />
-                        <Card.Body>
-                          <Card.Title>{movie.Title}</Card.Title>
-                          <Button variant='primary' value={movie._id} onClick={(e) => this.onRemoveFavorite(e, movie)}>Remove</Button>
-                        </Card.Body>
-                      </Card>
+                <Row className='justify-content-center'>
+                  {FavoriteMovies.length > 0 &&
+                    movies.map((movies) => {
+                      if (
+                        movies._id === FavoriteMovies.find((fav) => fav === movies._id)
+                      ) {
+                      return (
+                        <Col lg={3} md={6} className="mb-2" key={movies._id}>
+                          <CardGroup>
+                            <Card>
+                              
+                              <Card.Img className="img" variant="top" src={movies.ImagePath} />
+                              <Card.Body>
+
+                                <Button size="sm" className="card-text btn-fav" variant="danger" value={movies._id} onClick={(e) => this.onRemoveFavorite(movies)}>Remove</Button>
+                    
+                                
+                              </Card.Body>
+                            </Card>
+                          </CardGroup>
+                        </Col>
                       );
                     }
                   })}
                 </Row>
-              </Card.Body>
+              </Card.Body> 
             </Card>
           </Col>
         </Row>
@@ -241,4 +257,15 @@ onRemoveFavorite = (e, movie) => {
   }
 }
 
-export default ProfileView;
+let mapDispatchToProps = dispatch => {
+  return {
+    setUser: (user) => {
+      dispatch(setUser(user))
+    },
+    updateUser: (user) => {
+      dispatch(updateUser(user))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileView);

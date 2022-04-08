@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
-import { setMovies } from '../../actions/actions';
+import { setMovies, setUser } from '../../actions/actions';
 
 import MoviesList from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
@@ -52,9 +52,9 @@ componentDidMount() {
 }
 
 // When a movie is clicked, this function is called and updates the state of 'selectedMovie'
-  setSelectedMovie(movie) {
+  setSelectedMovie(movies) {
     this.setState ({
-      selectedMovie: movie
+      selectedMovie: movies
     });
   }
 
@@ -112,7 +112,7 @@ componentDidMount() {
 
           <Route exact path='/movies/:movieId' render={({ match, history }) => {
             return <Col md={8}>
-              <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
+              <MovieView movies={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
             </Col>
           }} />
 
@@ -159,7 +159,10 @@ componentDidMount() {
 };
 
 let mapStateToProps = state => {
-  return { movies: state.movies }
+  return { 
+    movies: state.movies,
+    user: state.user
+  };
 }
 
 export default connect(mapStateToProps, { setMovies } )(MainView);
