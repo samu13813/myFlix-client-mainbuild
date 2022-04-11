@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital@1&display=swap');
+
 * {
   box-sizing: border-box;
   color: #EEEEEE;
@@ -5,5 +7,11 @@
 }
 
 .navbar-collapse, .nav-link {
-  background-color: #F8F9FA !important;
+  background-color: #343A40 !important;
+  color: #EEEEEE;
+}
+
+.navbar-brand {
+  color: #ffc107 !important;
+  font-family: 'Roboto Condensed', sans-serif !important; 
 }

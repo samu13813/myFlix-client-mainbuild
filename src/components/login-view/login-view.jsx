@@ -51,31 +51,31 @@ export function LoginView(props) {
   };
 
   return (
-    <Container className='pt-5 mx-auto'>
+    <Container className='pt-5 w-25'>
       <Row>
         <Col>
           <CardGroup>
             <Card>
             <Card.Body>
-              <Card.Title>Log In</Card.Title>
+              <Card.Title as='h2'>Log In</Card.Title>
               <Form>
                 <Form.Group className='mb-3'>
-                  <Form.Label>Username:</Form.Label>
+                  <Form.Label className='mt-3'>Username:</Form.Label>
                   <Form.Control type='text' placeholder='Enter your Username' value={username} required onChange={e => setUsername(e.target.value)} />
                   {usernameErr && <p>{usernameErr}</p>}
                 </Form.Group>
 
                 <Form.Group className='mb-3'>
-                  <Form.Label>Password:</Form.Label>
+                  <Form.Label className='mt-3'>Password:</Form.Label>
                   <Form.Control type='password' placeholder='Enter your Password' value={password} required onChange={e => setPassword(e.target.value)} />
                   {passwordErr && <p>{passwordErr}</p>}
                 </Form.Group>
 
-                <Button variant='primary' type='submit' onClick={handleSubmit}>
+                <Button variant='warning' type='submit' className='mt-4' onClick={handleSubmit}>
                   Submit
                 </Button>
                 <Link to='/register'>
-                  <Button variant='secondary' className='ml-3'>Register Now</Button>
+                  <Button variant='outline-warning' className='ml-3 mt-4'>Register Now</Button>
                 </Link>
 
               </Form>

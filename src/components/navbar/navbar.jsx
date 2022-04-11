@@ -24,8 +24,8 @@ function NavbarComp({visibilityFilter}) {
 
   return (
     <div>
-      <Navbar bg="light" variant="light" expand="md" >
-          <Navbar.Brand className='navbar-logo' href="/">My Flix</Navbar.Brand>
+      <Navbar bg="dark" variant="dark" expand="md" >
+          <Navbar.Brand href="/">MY FLIX</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

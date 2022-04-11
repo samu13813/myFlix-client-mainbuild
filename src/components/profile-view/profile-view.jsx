@@ -220,8 +220,8 @@ onRemoveFavorite = (movies) => {
                       />
                   </Form.Group>
 
-                  <Button className='mt-3' variant='primary' type='submit' onClick={this.editUser}>Update User</Button>
-                  <Button className='mt-3 ml-3' variant='secondary' onClick={this.onDeleteUser}>Delete User</Button>
+                  <Button className='mt-3' variant='warning' type='submit' onClick={this.editUser}>Update User</Button>
+                  <Button className='mt-3 ml-3' variant='outline-warning' onClick={this.onDeleteUser}>Delete User</Button>
 
                 </Form>
               </Card.Body>
@@ -230,17 +230,11 @@ onRemoveFavorite = (movies) => {
         </Row>
         </Col>
         </Row>
-        
-        
-        <Row>
-          <Col className='mt-3'>
-            <h3>{Username} Favorite Movies </h3>
-          </Col>
-        </Row>
         <Row>
           <Col>
-            <Card>
-            <Card.Body className='favs-override'>
+            <Card className='mt-4'>    
+            <Card.Body>
+            <Card.Title as='h3'>Favorite Movies</Card.Title> 
                 {FavoriteMovies.length === 0 && (
                   <div className="text-center">No favorites added yet</div>
                 )}
@@ -273,7 +267,7 @@ onRemoveFavorite = (movies) => {
             </Card>
           </Col>
         </Row>
-        <Button variant='secondary' className='mt-3 mb-3' onClick={() => { onBackClick();}}>Back</Button>
+        <Button variant='warning' className='mt-3 mb-3' onClick={() => { onBackClick();}}>Back</Button>
       </Container>
     )
   }

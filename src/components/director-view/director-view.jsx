@@ -6,7 +6,7 @@ class DirectorView extends React.Component{
     const { director, onBackClick } = this.props;
 
     return (
-      <Container className='mx-auto mt-3'>
+      <Container className='mx-auto mt-5'>
         <Card>
           <Card.Body>
             <Card.Title>Director</Card.Title>
@@ -19,7 +19,7 @@ class DirectorView extends React.Component{
             <Card.Text>
               Birth: {director.Birth}
             </Card.Text>
-            <Button variant='secondary' onClick={() => { onBackClick(); }}>Back</Button>
+            <Button className='mt-2' variant='warning' onClick={() => { onBackClick(); }}>Back</Button>
           </Card.Body>
         </Card>
       </Container>

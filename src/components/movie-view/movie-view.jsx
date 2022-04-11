@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Button, Card, Container, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import './movie-view.scss';
 
 let mapStateToProps = (state) => {
   return {
@@ -69,33 +70,34 @@ class MovieView extends React.Component {
       <Container>
         <Col>
           <Row className='d-block'>
-            <Card className='mt-3'>
+            <Card className='mt-5'>
               <Card.Body>
 
-                <Card.Img className='pr-2 mb-2 w-25 float-left' src={movies.ImagePath} />
+                <Card.Img className='mr-3 mb-2 w-25 float-left' src={movies.ImagePath} />
 
-                <Card.Title>{movies.Title}</Card.Title>
+                <Card.Title className='mt-2'>{movies.Title}</Card.Title>
 
-                <Card.Text>{movies.Description}</Card.Text>
-
+                <Card.Text className='mt-5' as='h5'>{movies.Description}</Card.Text>
+                
                 <Link to={`/directors/${movies.Director.Name}`}>
-                  <Button className='mr-3 mt-5 mb-0' variant='secondary'>Director</Button>
+                  <Card.Text as='h5' className='mt-5'>{movies.Director.Name}</Card.Text>
                 </Link>
 
                 <Link to={`/genres/${movies.Genre.Name}`}>
-                  <Button className='mr-3 mt-5 mb-0' variant='secondary'>Genres</Button>
+                  <Card.Text as='h5' className='mt-4'>{movies.Genre.Name}</Card.Text>
                 </Link>
+
                 {
                   isFavorite ? (
-                    <Button className='mt-5 mb-0' value={movies._id} variant='danger' onClick={(movies) => this.removeFavorite(movies)}>Remove Favorite</Button>
+                    <Button className='mt-5 mb-0' value={movies._id} variant='outline-warning' onClick={(movies) => this.removeFavorite(movies)}>Remove Favorite</Button>
                   ) : (
-                    <Button className='mt-5 mb-0' value={movies._id} variant='light' onClick={(movies) => this.addFavorite(movies)}>Add to Favorites</Button>
+                    <Button className='mt-5 mb-0' value={movies._id} variant='outline-warning' onClick={(movies) => this.addFavorite(movies)}>Add to Favorites</Button>
                   )
                 }
 
                 <Row>
                   <Link to={`/`}>
-                     <Button className='mt-5' variant='secondary' onClick={() => { onBackClick(); }}>Back</Button>
+                     <Button className='mt-5' variant='warning' onClick={() => { onBackClick(); }}>Back</Button>
                   </Link>
                 </Row>
               </Card.Body>

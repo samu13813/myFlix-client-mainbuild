@@ -63,10 +63,10 @@ export function RegistrationView(props) {
           <CardGroup>
             <Card>
             <Card.Body>
-              <Card.Title>Please Register</Card.Title>
+              <Card.Title as='h2'>Please Register</Card.Title>
               <Form>
                 <Form.Group className="mb-3">
-                  <Form.Label>Username:</Form.Label>
+                  <Form.Label className='mt-3'>Username:</Form.Label>
                   <Form.Control type='text' placeholder='Enter a Username' required value={username} onChange={e => setUsername(e.target.value)} />
                   {usernameErr && <p>{usernameErr}</p>}
                 </Form.Group>
@@ -88,9 +88,9 @@ export function RegistrationView(props) {
                   <Form.Control type='date' onChange={e => setBirthday(e.target.value)} />
                 </Form.Group>
 
-                <Button variant='primary' type='submit' onClick={handleSubmit}>Submit</Button>
+                <Button variant='warning' type='submit' className='mt-4' onClick={handleSubmit}>Submit</Button>
                 <Link to='/'>
-                  <Button variant='secondary' className='ml-3'>Log In</Button>
+                  <Button variant='outline-warning' className='ml-3 mt-4'>Log In</Button>
                 </Link>
               </Form>
               </Card.Body>

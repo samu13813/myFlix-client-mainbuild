@@ -1,22 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Button, Card, Container, Row} from 'react-bootstrap/';
+import {Card, Container, Row} from 'react-bootstrap/';
 import { Link } from 'react-router-dom';
+import './movie-card.scss';
 
 class MovieCard extends React.Component {
   render() {
     const { movies } = this.props;
 
     return (
-      <Container className='mx-auto w-75 mt-2 mb-2'>
+      <Container className=' w-75 mt-2 mb-2'>
         <Row className='d-block'>
-          <Card className='mx-auto'>
+          <Card className='border-0'>
             <Card.Body>
-              <Card.Img className='pr-2 mb-2 w-75' src={movies.ImagePath} />
-              <Card.Title>{movies.Title}</Card.Title>
-              <Link to={`/movies/${movies._id}`}>
-                <Button variant='secondary'>Open</Button>
-              </Link>
+            <Link to={`/movies/${movies._id}`}>
+              <Card.Img src={movies.ImagePath} /> 
+            </Link>
+            <Link to={`/movies/${movies._id}`}>
+              <Card.Title className='text-center mt-3' as='h4'>{movies.Title}</Card.Title> 
+            </Link>
+              <Card.Text className='text-center'>{movies.Director.Name}</Card.Text>
             </Card.Body>
           </Card>
         </Row>

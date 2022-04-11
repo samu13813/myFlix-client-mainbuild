@@ -6,7 +6,7 @@ class GenreView extends React.Component {
     const { genre, onBackClick } = this.props;
 
     return (
-      <Container className='mx-auto mt-3'>
+      <Container className='mx-auto mt-5'>
         <Card>
           <Card.Body>
             <Card.Title>Genre</Card.Title>
@@ -16,7 +16,7 @@ class GenreView extends React.Component {
             <Card.Text>
               Description: {genre.Description}
             </Card.Text>
-            <Button variant='secondary' onClick={() => { onBackClick(); }}>Back</Button>
+            <Button className='mt-2' variant='warning' onClick={() => { onBackClick(); }}>Back</Button>
           </Card.Body>
         </Card>
       </Container>
