@@ -4,6 +4,13 @@ import PropTypes from 'prop-types';
 import {Form, Button, Card, CardGroup, Container, Col, Row} from 'react-bootstrap';
 import './login-view.scss';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  }
+}
 
 export function LoginView(props) {
   const [ username, setUsername ] = useState('');
@@ -91,3 +98,5 @@ export function LoginView(props) {
 LoginView.propTypes = {
   onLoggedIn: PropTypes.func.isRequired,
 };
+
+export default connect(mapStateToProps)(LoginView);

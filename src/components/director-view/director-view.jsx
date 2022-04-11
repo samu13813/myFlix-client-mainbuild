@@ -1,5 +1,12 @@
 import React from 'react';
 import { Container, Card, Button } from 'react-bootstrap/';
+import { connect } from 'react-redux';
+
+let mapStateToProps = (state) => {
+  return {
+    movies: state.movies
+  }
+}
 
 class DirectorView extends React.Component{
   render() {
@@ -27,4 +34,4 @@ class DirectorView extends React.Component{
   }
 }
 
-export default DirectorView;
+export default connect (mapStateToProps)(DirectorView);

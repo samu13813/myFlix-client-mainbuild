@@ -77,14 +77,14 @@ class MovieView extends React.Component {
 
                 <Card.Title className='mt-2'>{movies.Title}</Card.Title>
 
-                <Card.Text className='mt-5' as='h5'>{movies.Description}</Card.Text>
+                <Card.Text className='mt-4' as='h5'>{movies.Description}</Card.Text>
                 
                 <Link to={`/directors/${movies.Director.Name}`}>
                   <Card.Text as='h5' className='mt-5'>{movies.Director.Name}</Card.Text>
                 </Link>
 
                 <Link to={`/genres/${movies.Genre.Name}`}>
-                  <Card.Text as='h5' className='mt-4'>{movies.Genre.Name}</Card.Text>
+                  <Card.Text as='h5' className='mt-3'>{movies.Genre.Name}</Card.Text>
                 </Link>
 
                 {
@@ -97,7 +97,7 @@ class MovieView extends React.Component {
 
                 <Row>
                   <Link to={`/`}>
-                     <Button className='mt-5' variant='warning' onClick={() => { onBackClick(); }}>Back</Button>
+                     <Button className='mt-4' variant='warning' onClick={() => { onBackClick(); }}>Back</Button>
                   </Link>
                 </Row>
               </Card.Body>
@@ -109,21 +109,21 @@ class MovieView extends React.Component {
   }
 }
 
-// MovieView.propTypes = {
-//   movies: PropTypes.shape({
-//     Title: PropTypes.string.isRequired,
-//     Description: PropTypes.string.isRequired,
-//     ImagePath: PropTypes.string.isRequired,
-//     Genre: PropTypes.shape({
-//       Name: PropTypes.string.isRequired,
-//       Description: PropTypes.string.isRequired,
-//     }).isRequired,
-//     Director: PropTypes.shape({
-//       Name: PropTypes.string.isRequired,
-//       Birth: PropTypes.string.isRequired,
-//       Bio: PropTypes.string.isRequired,
-//     }).isRequired,
-//   }).isRequired,
-// };
+MovieView.propTypes = {
+  movies: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired,
+    }).isRequired,
+    Director: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Birth: PropTypes.string.isRequired,
+      Bio: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 export default connect (mapStateToProps)(MovieView);

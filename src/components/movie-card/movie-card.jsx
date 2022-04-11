@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import {Card, Container, Row} from 'react-bootstrap/';
 import { Link } from 'react-router-dom';
 import './movie-card.scss';
+import { connect } from 'react-redux';
+
+let mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
 
 class MovieCard extends React.Component {
   render() {
@@ -44,4 +51,4 @@ MovieCard.propTypes = {
   }).isRequired,
 };
 
-export default MovieCard;
+export default connect (mapStateToProps)(MovieCard);

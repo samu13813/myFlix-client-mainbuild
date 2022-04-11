@@ -1,5 +1,12 @@
 import React from 'react';
 import { Container, Card, Button} from 'react-bootstrap/';
+import { connect } from 'react-redux';
+
+let mapStateToProps = (state) => {
+  return {
+    movies: state.movies
+  }
+}
 
 class GenreView extends React.Component {
   render() {
@@ -24,4 +31,4 @@ class GenreView extends React.Component {
   }
 }
 
-export default GenreView;
+export default connect (mapStateToProps)(GenreView);

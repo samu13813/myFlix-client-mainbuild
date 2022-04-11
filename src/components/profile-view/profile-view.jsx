@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {Form, Button, Card, Container, Col, Row, CardGroup } from 'react-bootstrap';
-import { setMovies, setUser, updateUser } from '../../actions/actions';
+import { setUser, updateUser } from '../../actions/actions';
 
 let mapStateToProps = (state) => {
   return {
@@ -67,16 +67,11 @@ class ProfileView extends React.Component{
       headers: { Authorization: `Bearer ${token}`},
     })
     .then((response) => {
-      let formattedDate = null;
-      let anyBirthday = response.data.Birthday;
-      if(anyBirthday){
-        formattedDate = anyBirthday.slice(0,10)
-      }
-      this.setState({
+        this.setState({
         Username: response.data.Username,
         Password: response.data.Password,
         Email: response.data.Email,
-        Birthday: formattedDate,
+        Birthday: response.data.Birthday,
       });
 
       localStorage.setItem('user', this.state.Username);
@@ -152,9 +147,8 @@ onRemoveFavorite = (movies) => {
 };
 
   render() {
-
     const { movies, onBackClick } = this.props;
-    const { FavoriteMovies, Username, Email, formattedDate } = this.state;
+    const { FavoriteMovies, Username, Email, Birthday } = this.state;
     
 
     return (
@@ -166,7 +160,7 @@ onRemoveFavorite = (movies) => {
              <Card.Title as='h3'>Hello, {Username}</Card.Title>
               <Card.Text><b>Username:</b> {Username}</Card.Text>
               <Card.Text><b>Email:</b> {Email}</Card.Text>
-              <Card.Text><b>Birthday:</b> {formattedDate}</Card.Text>
+              <Card.Text><b>Birthday:</b> {Birthday}</Card.Text>
             </Card.Body>
           </Card>
         </Col>
@@ -283,5 +277,23 @@ let mapDispatchToProps = dispatch => {
     }
   }
 }
+
+ProfileView.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.shape({
+      Title: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired,
+      ImagePath: PropTypes.string.isRequired,
+      Genre: PropTypes.shape({
+          Name: PropTypes.string.isRequired,
+          Description: PropTypes.string.isRequired,
+      }).isRequired,
+      Director: PropTypes.shape({
+          Bio: PropTypes.string.isRequired,
+          Birth: PropTypes.string.isRequired,
+          Name: PropTypes.string.isRequired,
+      }).isRequired,
+  })).isRequired,
+  onBackClick: PropTypes.func.isRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileView);
