@@ -19,47 +19,29 @@ class MovieView extends React.Component {
     Favorites: this.props.user.Favorites || []
   }
 
-  addFavorite() {
+  addFavorite(movies) {
     const token = localStorage.getItem('token');
     const Username = localStorage.getItem('user');
-    const { movies } = this.props;
-
-    axios.post(`https://myflixmovies-app.herokuapp.com/users/${Username}/movies/${movies._id}`,
+  
+    axios.post(`https://myflixmovies-app.herokuapp.com/users/${Username}/movies/${movies._id}`,   {
+      Favorites: this.state.Favorites
+    },
     {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}`},
     })
     .then(response => {
       console.log(response);
-      alert(movies.Title + 'was added to your favorites');
-      window.open('/movies/${movies._id}', '_self');
+      alert(movies.Title + ' was added to your favorites');
     })
     .catch(function (error) {
-
       console.log(error);
     });
   }
   
-  removeFavorite = (movies) => {
-    const Username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-  
-    axios.delete(`https://myflixmovies-app.herokuapp.com/users/${Username}/movies/${movies._id}`, {
-      headers: { Authorization: `Bearer ${token}`},
-    })
-    .then((response) => {
-      console.log(response);
-      alert(movies.Title + 'Removed from Favorites');
-      window.open(`/movies`, '_self');
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  };
-
   render() {
     const { movies, onBackClick, user } = this.props;
 
-    let isFavorite = false;
+    let isFavorite = false
     if (user.Favorites.includes(movies._id)) {
       isFavorite = true;
     } else {
@@ -86,15 +68,7 @@ class MovieView extends React.Component {
                 <Link to={`/genres/${movies.Genre.Name}`}>
                   <Card.Text as='h5' className='mt-3'>{movies.Genre.Name}</Card.Text>
                 </Link>
-
-                {
-                  isFavorite ? (
-                    <Button className='mt-5 mb-0' value={movies._id} variant='outline-warning' onClick={(movies) => this.removeFavorite(movies)}>Remove Favorite</Button>
-                  ) : (
-                    <Button className='mt-5 mb-0' value={movies._id} variant='outline-warning' onClick={(movies) => this.addFavorite(movies)}>Add to Favorites</Button>
-                  )
-                }
-
+                <Button className='mt-5 mb-0' value={movies._id} variant='outline-warning' onClick={(e) => this.addFavorite(movies)}>Add to Favorites</Button>
                 <Row>
                   <Link to={`/`}>
                      <Button className='mt-4' variant='warning' onClick={() => { onBackClick(); }}>Back</Button>
